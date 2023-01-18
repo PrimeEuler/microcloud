@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<service> 
+<short>Microk8s API server</short>
+<description>SSL encrypted. Clients need to present a valid password from a Static Password File.</description>
+<port protocol="tcp" port="16443"/>
+</service>

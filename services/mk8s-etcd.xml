@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<service>
+<short>Microk8s etcd </short>
+<description>SSL encrypted. Client certificates required to connect.</description>
+<port protocol="tcp"  port="12379"/>
+</service>

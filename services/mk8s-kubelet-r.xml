@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<service>
+<short>Microk8s kubelet r</short>
+<description>Read only port for the Kubelet.</description>
+<port protocol="tcp" port="10255"/>
+</service> 

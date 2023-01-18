@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<service> <short>Microk8s kube-scheduler</short> 
+<description>Serve HTTPS with authentication and authorization.</description>
+<port protocol="tcp"  port="10259"/>
+</service>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<service>
+<short>Microk8s cluster-agent</short>
+<description>Proper token required to authorise actions.</description>
+<port protocol="tcp" port="25000"/>
+</service> 

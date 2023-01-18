@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<service>
+<short>Microk8s calico</short>
+<description>Calico networking with VXLAN enabled</description>
+<port protocol="udp" port="4789"/>
+</service>

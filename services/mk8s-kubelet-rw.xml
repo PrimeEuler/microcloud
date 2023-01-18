@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<service>
+<short>Microk8s kubelet rw</short>
+<description>Anonymous authentication is disabled. X509 client certificate is required.</description>
+<port protocol="tcp" port="10250"/>
+</service>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<service>
+<short>Microk8s kube-controller</short>
+<description>Serve HTTPS with authentication and authorization.</description>
+<port protocol="tcp"  port="10257"/>
+</service> 
