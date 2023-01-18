@@ -16,6 +16,11 @@ net.ipv4.conf.all.send_redirects = 0
 net.ipv4.conf.default.send_redirects = 0
 net.ipv4.conf.default.accept_redirects = 0
 
+
+nano /etc/frr/daemons 
+# bgpd=no
+bgpd=yes
+
 ```
 
 
