@@ -1,3 +1,3 @@
 firewalld services for microk8s
 
-/usr/lib/firewalld/services/
+On each microk8s nodes, copy files to /usr/lib/firewalld/services/
