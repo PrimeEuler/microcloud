@@ -1,1 +1,1 @@
-ipsec VPN configuration
+ipsec VPN configuration to OCI VPN gateway
