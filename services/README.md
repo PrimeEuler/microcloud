@@ -1,1 +1,2 @@
-micrk8s services for firewalld
+firewalld services for microk8s
+/usr/lib/firewalld/services/
