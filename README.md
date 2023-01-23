@@ -37,10 +37,6 @@ sudo apt-get install firewalld
 ```
 sudo apt-get install cockpit
 ```
-## microk8s servces for firewalld
-```
-sudo cp services/*.xml  /usr/lib/firewalld/services/ 
-```
 ## [microk8s](https://microk8s.io/docs/getting-started)
 ### 1. install
 ```
@@ -62,5 +58,8 @@ sudo firewall-cmd --zone=trusted --add-interface=vxlan.calico --permanent
 #### 5. calico pod networks
 ```
 sudo firewall-cmd --zone=trusted --add-source=10.0.0.0/8  --permanent 
-
+```
+#### 6. microk8s servces for firewalld
+```
+sudo cp services/*.xml  /usr/lib/firewalld/services/ 
 ```
