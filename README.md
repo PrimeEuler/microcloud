@@ -38,7 +38,7 @@ sudo apt-get install firewalld
 sudo apt-get install cockpit
 ```
 ## [microk8s](https://microk8s.io/docs/getting-started)
-### 1. install
+#### 1. install
 ```
 sudo snap install microk8s --classic --channel=1.26
 ```
