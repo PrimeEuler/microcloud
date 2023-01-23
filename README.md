@@ -29,11 +29,12 @@ bgpd=yes
 
 # ubuntu microk8s
 
+firewalld
 ```
-# firewalld
 sudo apt-get install firewalld
-
-# cockpit
+```
+cockpit
+```
 sudo apt-get install cockpit
 
 # add servceis to public interface
