@@ -37,7 +37,7 @@ cockpit
 ```
 sudo apt-get install cockpit
 ```
-add servceis to public interface
+add microk8s servces to public interface
 ```
 sudo cp services/*.xml  /usr/lib/firewalld/services/ 
 ```
