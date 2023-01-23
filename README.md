@@ -42,24 +42,24 @@ sudo apt-get install cockpit
 sudo cp services/*.xml  /usr/lib/firewalld/services/ 
 ```
 ## [microk8s](https://microk8s.io/docs/getting-started)
-### install
+### 1. install
 ```
 sudo snap install microk8s --classic --channel=1.26
 ```
-#### join the group
+#### 2. join the group
 ```
 sudo usermod -a -G microk8s $USER
 sudo chown -f -R $USER ~/.kube
 ```
-#### re-enter the session
+#### 3. re-enter the session
 ```
 su - $USER
 ```
-#### calico vxlan overlay
+#### 4. calico vxlan overlay
 ```
 sudo firewall-cmd --zone=trusted --add-interface=vxlan.calico --permanent
 ```
-#### calico pod networks
+#### 5. calico pod networks
 ```
 sudo firewall-cmd --zone=trusted --add-source=10.0.0.0/8  --permanent 
 
