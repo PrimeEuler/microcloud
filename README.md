@@ -41,7 +41,8 @@ add servceis to public interface
 ```
 sudo cp services/*.xml  /usr/lib/firewalld/services/ 
 ```
-https://microk8s.io/docs/getting-started 
+https://microk8s.io/docs/getting-started
+
 install
 ```
 sudo snap install microk8s --classic --channel=1.26
