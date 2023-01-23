@@ -42,6 +42,7 @@ sudo apt-get install cockpit
 sudo cp services/*.xml  /usr/lib/firewalld/services/ 
 ```
 ## [microk8s](https://microk8s.io/docs/getting-started)
+### install
 ```
 sudo snap install microk8s --classic --channel=1.26
 ```
