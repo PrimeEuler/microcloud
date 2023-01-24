@@ -31,7 +31,7 @@ bgpd=yes
 ```
 sudo snap install microk8s --classic --channel=1.26
 ```
-#### 2. join the group
+#### 2. join the microk8s group
 ```
 sudo usermod -a -G microk8s $USER
 sudo chown -f -R $USER ~/.kube
