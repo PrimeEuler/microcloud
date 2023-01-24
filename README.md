@@ -56,7 +56,7 @@ sudo firewall-cmd --zone=trusted --add-source=10.0.0.0/8  --permanent
 ```
 sudo cp services/*.xml  /usr/lib/firewalld/services/ 
 ```
-#### 4. lod denied
+#### 4. log denied
 ```
 sudo firewall-cmd --set-log-denied=all
 ```
