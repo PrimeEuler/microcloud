@@ -59,4 +59,4 @@ sudo cp services/*.xml  /usr/lib/firewalld/services/
 # [cockpit](https://cockpit-project.org/)
 ```
 sudo apt-get install cockpit
-``
+```
