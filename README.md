@@ -56,6 +56,10 @@ sudo firewall-cmd --zone=trusted --add-source=10.0.0.0/8  --permanent
 ```
 sudo cp services/*.xml  /usr/lib/firewalld/services/ 
 ```
+#### 4. lod denied
+```
+sudo firewall-cmd --set-log-denied=all
+```
 ### [cockpit](https://cockpit-project.org/)
 ```
 sudo apt-get install cockpit
