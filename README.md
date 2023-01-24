@@ -1,7 +1,7 @@
 # **microcloud**
 microk8s fronted by a vpn gateway and reverse proxy
 
-# ubuntu vpn gateway with reverse proxy
+### vpn gateway and reverse proxy
 ```
 sudo apt-get install firewalld
 sudo apt-get install cockpit
@@ -26,7 +26,7 @@ bgpd=yes
 
 ```
 
-# [microk8s](https://microk8s.io/docs/getting-started)
+### [microk8s](https://microk8s.io/docs/getting-started)
 #### 1. install
 ```
 sudo snap install microk8s --classic --channel=1.26
@@ -40,7 +40,7 @@ sudo chown -f -R $USER ~/.kube
 ```
 su - $USER
 ```
-# [firewalld](https://firewalld.org/)
+### [firewalld](https://firewalld.org/)
 ```
 sudo apt-get install firewalld
 ```
@@ -56,7 +56,7 @@ sudo firewall-cmd --zone=trusted --add-source=10.0.0.0/8  --permanent
 ```
 sudo cp services/*.xml  /usr/lib/firewalld/services/ 
 ```
-# [cockpit](https://cockpit-project.org/)
+### [cockpit](https://cockpit-project.org/)
 ```
 sudo apt-get install cockpit
 ```
