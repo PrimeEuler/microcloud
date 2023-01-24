@@ -62,6 +62,7 @@ sudo cp services/*.xml  /usr/lib/firewalld/services/
 sudo firewall-cmd --set-log-denied=all
 ```
 ### [cockpit](https://cockpit-project.org/)
+#### 1. install
 ```
 sudo apt-get install cockpit
 ```
