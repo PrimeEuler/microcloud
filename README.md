@@ -41,22 +41,23 @@ sudo chown -f -R $USER ~/.kube
 su - $USER
 ```
 ### [firewalld](https://firewalld.org/)
+#### 1. install
 ```
 sudo apt-get install firewalld
 ```
-#### 1. calico vxlan overlay
+#### 2. calico vxlan overlay
 ```
 sudo firewall-cmd --zone=trusted --add-interface=vxlan.calico --permanent
 ```
-#### 2. calico pod networks
+#### 3. calico pod networks
 ```
 sudo firewall-cmd --zone=trusted --add-source=10.0.0.0/8  --permanent 
 ```
-#### 3. microk8s servces for firewalld
+#### 4. microk8s servces for firewalld
 ```
 sudo cp services/*.xml  /usr/lib/firewalld/services/ 
 ```
-#### 4. log denied
+#### 5. log denied
 ```
 sudo firewall-cmd --set-log-denied=all
 ```
