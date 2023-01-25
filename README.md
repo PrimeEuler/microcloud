@@ -37,6 +37,15 @@ sudo apt-get install firewalld
 
 # enable logging
 sudo firewall-cmd --set-log-denied=all
+
+# Enable IP Rorwarding on gateway nodes only
+sudo nano /etc/sysctl.conf
+
+net.ipv4.ip_forward=1
+net.ipv4.conf.all.accept_redirects = 0
+net.ipv4.conf.all.send_redirects = 0
+net.ipv4.conf.default.send_redirects = 0
+net.ipv4.conf.default.accept_redirects = 0
 ```
 ## [cockpit](https://cockpit-project.org/)
 ```shell
