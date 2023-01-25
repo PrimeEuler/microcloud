@@ -51,15 +51,13 @@ sudo apt-get install libreswan
 ## [frrouting](https://frrouting.org/)
 ```shell
 sudo apt-get install frr
-```
-##### Enable BGP
-```
+
+# Enable BGP
 nano /etc/frr/daemons
 
 bgpd=yes
-```
-##### Enable IP Rorwarding
-```
+
+# Enable IP Rorwarding
 sudo nano /etc/sysctl.conf
 
 net.ipv4.ip_forward=1
@@ -85,13 +83,11 @@ sudo chown -f -R $USER ~/.kube
 
 # re-enter the session
 su - $USER
-```
-##### microk8s servces for firewalld
-```
+
+# microk8s servces for firewalld
 sudo cp services/*.xml  /usr/lib/firewalld/services/ 
-```
-##### calico vxlan firewalld rules
-```
+
+# calico vxlan firewalld rules
 sudo firewall-cmd --zone=trusted --add-interface=vxlan.calico --permanent
 
 # calico pod networks
