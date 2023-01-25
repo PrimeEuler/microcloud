@@ -42,7 +42,7 @@ sudo apt-get install cockpit
 # ubuntu raspi extras not included in image
 # sudo apt-get install linux-modules-extra-5.15.0-1017-raspi
 
-sudo apt-get install cockpit
+sudo apt-get install libreswan
 ```
 ### [frrouting](https://frrouting.org/)
 ```shell
