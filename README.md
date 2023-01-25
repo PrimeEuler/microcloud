@@ -1,5 +1,10 @@
 # **microcloud**
-microk8s fronted by a vpn gateway and reverse proxy
+A runbook to deploy a HA 3 node microk8s cluster (mk8s1-3) and a 2 node HA VPN gateway and reverse proxy (gw1-2).
+
+| ID  | TASK | DESCRIPTION | 
+| --- | ---- | ----------- |
+| 1 | Install firewalld on gw1 | Firewall to protect the gateway and cluster | 
+| 2 | Install cockpit  | Web-based graphical interface for servers | 
 
 ### vpn gateway and reverse proxy
 ```
