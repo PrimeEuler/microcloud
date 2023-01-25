@@ -27,6 +27,7 @@ graph TD;
 | [3](#libreswan) | Install libreswan on gateway nodes | Libreswan is a free software implementation of the most widely supported and standardized VPN protocol using "IPsec" and the Internet Key Exchange ("IKE") | 
 | [4](#frrouting) | Install frrouting on gateway nodes | FRRouting (FRR) is a free and open source Internet routing protocol suite for Linux and Unix platforms. It implements BGP, OSPF, RIP, IS-IS, PIM, LDP, BFD, Babel, PBR, OpenFabric and VRRP, with alpha support for EIGRP and NHRP |
 | [5](#haproxy) | Install haproxy on gateway nodes | HAProxy is a free, very fast and reliable reverse-proxy offering high availability, load balancing, and proxying for TCP and HTTP-based applications |
+| [6](#microk8s) | Install microk8s on microk8s nodes | Microk8s is zero-ops, pure-upstream Kubernetes, from developer workstations to production. |
 
 
 ### [firewalld](https://firewalld.org/)
@@ -52,7 +53,19 @@ sudo apt-get install frr
 ```shell
 sudo apt-get install haproxy
 ```
+### [microk8s](https://microk8s.io/docs/getting-started)
+```shell
+sudo snap install microk8s --classic --channel=1.26
 
+# join the microk8s group
+sudo usermod -a -G microk8s $USER
+
+# take ownership of the config files
+sudo chown -f -R $USER ~/.kube
+
+# re-enter the session
+su - $USER
+```
 
 
 
@@ -84,20 +97,7 @@ bgpd=yes
 
 ```
 
-### [microk8s](https://microk8s.io/docs/getting-started)
-#### 1. install
-```shell
-sudo snap install microk8s --classic --channel=1.26
-```
-#### 2. join the microk8s group
-```shell
-sudo usermod -a -G microk8s $USER
-sudo chown -f -R $USER ~/.kube
-```
-#### 3. re-enter the session
-```shell
-su - $USER
-```
+
 #### 2. calico vxlan overlay
 ```shell
 sudo firewall-cmd --zone=trusted --add-interface=vxlan.calico --permanent
