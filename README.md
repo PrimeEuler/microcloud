@@ -22,8 +22,25 @@ graph TD;
 
 | ID  | TASK | DESCRIPTION | 
 | --- | ---- | ----------- |
-| [1](#firewalld) | Install firewalld on gw1-2 | Firewall to protect the gateway and cluster | 
-| 2 | Install cockpit on gw1-2 | Web-based graphical interface for servers | 
+| [1](#firewalld) | Install firewalld on ggateway nodes | Firewall to protect the gateway and cluster | 
+| [2](#cockpit) | Install cockpit on gateway nodes | Web-based graphical interface for servers | 
+
+
+### [firewalld](https://firewalld.org/)
+```shell
+sudo apt-get install firewalld
+```
+### [cockpit](https://cockpit-project.org/)
+```shell
+sudo apt-get install cockpit
+```
+
+
+
+
+
+
+
 
 ### vpn gateway and reverse proxy
 ```
@@ -64,11 +81,6 @@ sudo chown -f -R $USER ~/.kube
 ```shell
 su - $USER
 ```
-### [firewalld](https://firewalld.org/)
-#### 1. install
-```shell
-sudo apt-get install firewalld
-```
 #### 2. calico vxlan overlay
 ```shell
 sudo firewall-cmd --zone=trusted --add-interface=vxlan.calico --permanent
@@ -86,7 +98,6 @@ sudo cp services/*.xml  /usr/lib/firewalld/services/
 sudo firewall-cmd --set-log-denied=all
 ```
 ### [cockpit](https://cockpit-project.org/)
-#### 1. install
 ```shell
 sudo apt-get install cockpit
 ```
