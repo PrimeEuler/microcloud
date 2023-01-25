@@ -28,41 +28,41 @@ bgpd=yes
 
 ### [microk8s](https://microk8s.io/docs/getting-started)
 #### 1. install
-```
+```shell
 sudo snap install microk8s --classic --channel=1.26
 ```
 #### 2. join the microk8s group
-```
+```shell
 sudo usermod -a -G microk8s $USER
 sudo chown -f -R $USER ~/.kube
 ```
 #### 3. re-enter the session
-```
+```shell
 su - $USER
 ```
 ### [firewalld](https://firewalld.org/)
 #### 1. install
-```
+```shell
 sudo apt-get install firewalld
 ```
 #### 2. calico vxlan overlay
-```
+```shell
 sudo firewall-cmd --zone=trusted --add-interface=vxlan.calico --permanent
 ```
 #### 3. calico pod networks
-```
+```shell
 sudo firewall-cmd --zone=trusted --add-source=10.0.0.0/8  --permanent 
 ```
 #### 4. microk8s servces for firewalld
-```
+```shell
 sudo cp services/*.xml  /usr/lib/firewalld/services/ 
 ```
 #### 5. log denied
-```
+```shell
 sudo firewall-cmd --set-log-denied=all
 ```
 ### [cockpit](https://cockpit-project.org/)
 #### 1. install
-```
+```shell
 sudo apt-get install cockpit
 ```
