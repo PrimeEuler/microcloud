@@ -24,6 +24,7 @@ graph TD;
 | --- | ---- | ----------- |
 | [1](#firewalld) | Install firewalld on ggateway nodes | Firewall to protect the gateway and cluster | 
 | [2](#cockpit) | Install cockpit on gateway nodes | Web-based graphical interface for servers | 
+| [3](#libreswan) | Install libreswan on gateway nodes | Libreswan is a free software implementation of the most widely supported and standardized VPN protocol using "IPsec" and the Internet Key Exchange ("IKE") | 
 
 
 ### [firewalld](https://firewalld.org/)
@@ -34,7 +35,10 @@ sudo apt-get install firewalld
 ```shell
 sudo apt-get install cockpit
 ```
-
+### [libreswan](https://libreswan.org/)
+```shell
+sudo apt-get install cockpit
+```
 
 
 
