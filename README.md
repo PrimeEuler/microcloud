@@ -1,6 +1,16 @@
 # **microcloud**
 A runbook to deploy a 3 node HA microk8s cluster (mk8s1-3) and a 2 node HA VPN gateway and reverse proxy (gw1-2) for access.
 
+```mermaid
+graph TD;
+    gw1-->mk8s1;
+    gw1-->mk8s2;
+    gw1-->mk8s3;
+    gw2-->mk8s1;
+    gw2-->mk8s2;
+    gw2-->mk8s3;
+```
+
 | ID  | TASK | DESCRIPTION | 
 | --- | ---- | ----------- |
 | 1 | Install firewalld on gw1-2 | Firewall to protect the gateway and cluster | 
