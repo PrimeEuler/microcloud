@@ -46,6 +46,10 @@ net.ipv4.conf.all.accept_redirects = 0
 net.ipv4.conf.all.send_redirects = 0
 net.ipv4.conf.default.send_redirects = 0
 net.ipv4.conf.default.accept_redirects = 0
+
+# Enable IP masquerade on gateway nodes only
+sudo firewall-cmd --add-masquerade --permanent
+sudo firewall-cmd --reload
 ```
 ## [cockpit](https://cockpit-project.org/)
 ```shell
