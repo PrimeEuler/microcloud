@@ -71,15 +71,7 @@ sudo nano /etc/frr/daemons
 
 bgpd=yes
 
-# Enable IP Rorwarding
-sudo nano /etc/sysctl.conf
-
-net.ipv4.ip_forward=1
-net.ipv4.conf.all.accept_redirects = 0
-net.ipv4.conf.all.send_redirects = 0
-net.ipv4.conf.default.send_redirects = 0
-net.ipv4.conf.default.accept_redirects = 0
-
+sudo systemctl restart frr
 ```
 ### [haproxy](https://www.haproxy.org/)
 ```shell
