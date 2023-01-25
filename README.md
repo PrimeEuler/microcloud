@@ -1,5 +1,5 @@
 # **microcloud**
-A runbook to deploy a HA 3 node microk8s cluster (mk8s1-3) and a 2 node HA VPN gateway and reverse proxy (gw1-2).
+A runbook to deploy a 3 node HA microk8s cluster (mk8s1-3) and a 2 node HA VPN gateway and reverse proxy (gw1-2).
 
 | ID  | TASK | DESCRIPTION | 
 | --- | ---- | ----------- |
