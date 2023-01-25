@@ -53,7 +53,7 @@ sudo apt-get install libreswan
 sudo apt-get install frr
 
 # Enable BGP
-nano /etc/frr/daemons
+sudo nano /etc/frr/daemons
 
 bgpd=yes
 
