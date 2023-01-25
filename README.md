@@ -22,8 +22,8 @@ graph TD;
 
 | ID  | TASK | DESCRIPTION | 
 | --- | ---- | ----------- |
-| [1](#firewalld) | Install firewalld on gateway nodes | Firewall to protect the gateway and cluster | 
-| [2](#cockpit) | Install cockpit on gateway nodes | Web-based graphical interface for servers | 
+| [1](#firewalld) | Install firewalld on all nodes | Firewall to protect the gateway and cluster | 
+| [2](#cockpit) | Install cockpit on all nodes | Web-based graphical interface for servers | 
 | [3](#libreswan) | Install libreswan on gateway nodes | Libreswan is a free software implementation of the most widely supported and standardized VPN protocol using "IPsec" and the Internet Key Exchange ("IKE") | 
 | [4](#frrouting) | Install frrouting on gateway nodes | FRRouting (FRR) is a free and open source Internet routing protocol suite for Linux and Unix platforms. It implements BGP, OSPF, RIP, IS-IS, PIM, LDP, BFD, Babel, PBR, OpenFabric and VRRP, with alpha support for EIGRP and NHRP |
 | [5](#haproxy) | Install haproxy on gateway nodes | HAProxy is a free, very fast and reliable reverse-proxy offering high availability, load balancing, and proxying for TCP and HTTP-based applications |
