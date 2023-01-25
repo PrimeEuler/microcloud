@@ -42,6 +42,8 @@ sudo firewall-cmd --set-log-denied=all
 sudo nano /etc/sysctl.conf
 
 net.ipv4.ip_forward=1
+
+# Attackers could use bogus ICMP redirect messages to maliciously alter the system routing tables
 net.ipv4.conf.all.accept_redirects = 0
 net.ipv4.conf.all.send_redirects = 0
 net.ipv4.conf.default.send_redirects = 0
