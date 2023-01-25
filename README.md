@@ -33,6 +33,9 @@ graph TD;
 ## [firewalld](https://firewalld.org/)
 ```shell
 sudo apt-get install firewalld
+
+# enable logging
+sudo firewall-cmd --set-log-denied=all
 ```
 ## [cockpit](https://cockpit-project.org/)
 ```shell
@@ -83,30 +86,15 @@ sudo chown -f -R $USER ~/.kube
 # re-enter the session
 su - $USER
 ```
-
-
-
-
-
-
-
-#### 2. calico vxlan overlay
-```shell
-sudo firewall-cmd --zone=trusted --add-interface=vxlan.calico --permanent
+##### microk8s servces for firewalld
 ```
-#### 3. calico pod networks
-```shell
-sudo firewall-cmd --zone=trusted --add-source=10.0.0.0/8  --permanent 
-```
-#### 4. microk8s servces for firewalld
-```shell
 sudo cp services/*.xml  /usr/lib/firewalld/services/ 
 ```
-#### 5. log denied
-```shell
-sudo firewall-cmd --set-log-denied=all
+##### calico vxlan firewalld rules
 ```
-### [cockpit](https://cockpit-project.org/)
-```shell
-sudo apt-get install cockpit
+sudo firewall-cmd --zone=trusted --add-interface=vxlan.calico --permanent
+
+# calico pod networks
+sudo firewall-cmd --zone=trusted --add-source=10.0.0.0/8  --permanent 
 ```
+
