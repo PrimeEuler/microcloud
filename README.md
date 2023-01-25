@@ -3,14 +3,14 @@ A runbook to deploy a 3 node HA microk8s cluster (mk8s1-3) and a 2 node HA VPN g
 
 ```mermaid
 graph TD;
-    A(vip)--->B(gw1);
-    A(vip)--->B(gw2);
-    gw1-->mk8s1;
-    gw1-->mk8s2;
-    gw1-->mk8s3;
-    gw2-->mk8s1;
-    gw2-->mk8s2;
-    gw2-->mk8s3;
+    A(vip)--->gw1;
+    A(vip)--->gw2;
+    B(gw1)-->mk8s1;
+    B(gw1)-->mk8s2;
+    B(gw1)-->mk8s3;
+    B(gw2)-->mk8s1;
+    B(gw2)-->mk8s2;
+    B(gw2)-->mk8s3;
 ```
 
 | ID  | TASK | DESCRIPTION | 
