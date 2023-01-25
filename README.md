@@ -3,6 +3,7 @@ A runbook to deploy a 3 node HA microk8s cluster (mk8s1-3) and a 2 node HA VPN g
 * The gateway nodes require 2 NIC's (inside,outside).
 
 ```mermaid
+%%{init: {'theme':'dark'}}%%
 graph TD;
     A(vip);
     B(gw1);
