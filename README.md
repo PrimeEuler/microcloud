@@ -22,7 +22,7 @@ graph TD;
 
 | ID  | TASK | DESCRIPTION | 
 | --- | ---- | ----------- |
-| 1 | Install firewalld on gw1-2 | Firewall to protect the gateway and cluster | 
+| [1](#firewalld) | Install firewalld on gw1-2 | Firewall to protect the gateway and cluster | 
 | 2 | Install cockpit on gw1-2 | Web-based graphical interface for servers | 
 
 ### vpn gateway and reverse proxy
