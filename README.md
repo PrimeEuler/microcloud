@@ -11,14 +11,8 @@ graph TD;
     D(mk8s1);
     E(mk8s2);
     F(mk8s3);
-    A-->B;
-    A-->C;
-    B-->D;
-    B-->E;
-    B-->F;
-    C-->D;
-    C-->E;
-    C-->F;
+    A-->B & C;
+    B & C-->D & E & F;
 ```
 
 | ID  | TASK | DESCRIPTION | 
