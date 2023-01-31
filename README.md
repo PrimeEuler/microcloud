@@ -13,7 +13,6 @@ graph TD;
     F(mk8s-3);
     A-->B & C;
     B & C-->D & E & F;
-    V-->B & C;
 ```
 
 | ID  | TASK | DESCRIPTION | 
