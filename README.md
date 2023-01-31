@@ -45,7 +45,6 @@ network:
         - 8.8.4.4
         search:
         - .local
-      renderer: NetworkManager
     eth1:
     # inside
       addresses:
@@ -54,6 +53,7 @@ network:
       # gw2 192.168.3.3
       # VRRP 192.168.3.1 (FRRouting)
   version: 2
+  renderer: NetworkManager
   
 sudo netplan try
 [enter]
@@ -76,9 +76,8 @@ network:
         - 8.8.4.4
         search:
         - .local
-      renderer: NetworkManager
   version: 2
-
+  renderer: NetworkManager
 sudo netplan try
 [enter]
 
