@@ -121,6 +121,8 @@ net.ipv4.conf.all.send_redirects = 0
 net.ipv4.conf.default.send_redirects = 0
 net.ipv4.conf.default.accept_redirects = 0
 
+sysctl -p
+
 # Enable IP masquerade on gateway nodes only
 sudo firewall-cmd --add-masquerade --permanent
 
