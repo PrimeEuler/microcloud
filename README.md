@@ -55,7 +55,8 @@ network:
       # VRRP 192.168.3.1 (FRRouting)
   version: 2
   
-
+sudo netplan try
+[enter]
 
 # Microk8s nodes configure (inside) network
 sudo nano /etc/netplan/*.yaml
@@ -77,6 +78,9 @@ network:
         - .local
       renderer: NetworkManager
   version: 2
+
+sudo netplan try
+[enter]
 
 
 
