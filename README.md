@@ -82,7 +82,7 @@ network:
       - 192.168.3.11/24
       routes:
       - to: default
-        via: 192.168.1.1
+        via: 192.168.3.1
       nameservers:
         addresses:
         - 8.8.8.8
