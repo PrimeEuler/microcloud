@@ -123,6 +123,8 @@ net.ipv4.conf.default.accept_redirects = 0
 
 # Enable IP masquerade on gateway nodes only
 sudo firewall-cmd --add-masquerade --permanent
+
+firewall-cmd --permanent --zone=trusted --change-interface=(inside)
 sudo firewall-cmd --reload
 ```
 ## [cockpit](https://cockpit-project.org/)
