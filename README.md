@@ -14,7 +14,7 @@ graph TD;
     V(vrrp);
     A-->B & C;
     B & C-->D & E & F;
-    V->B & C;
+    V-->B & C;
 ```
 
 | ID  | TASK | DESCRIPTION | 
