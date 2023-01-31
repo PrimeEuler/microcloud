@@ -30,11 +30,11 @@ graph TD;
 # All nodes hosts entries
 sudo nano /etc/hosts
 
-192.168.1.11 gw-1
-192.168.2.12 gw-2
-192.168.3.11 mk8s-1
-192.168.3.12 mk8s-2
-192.168.3.13 mk8s-3
+192.168.1.11 gw1
+192.168.2.12 gw2
+192.168.3.11 mk8s1
+192.168.3.12 mk8s2
+192.168.3.13 mk8s3
 
 
 # All nodes NTP
@@ -67,6 +67,9 @@ network:
     # inside
       addresses:
       - 192.168.3.1/24
+      # gw1 192.168.3.2
+      # gw2 192.168.3.3
+      # VRRP 192.168.3.1 (FRRouting)
   version: 2
   
 
