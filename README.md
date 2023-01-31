@@ -27,7 +27,72 @@ graph TD;
 
 ## [netplan](https://netplan.io/)
 ```shell
+# All nodes hosts entries
+sudo nano /etc/hosts
+
+192.168.1.11 gw-1
+192.168.2.12 gw-2
+192.168.3.11 mk8s-1
+192.168.3.12 mk8s-2
+192.168.3.13 mk8s-3
+
+
+# All nodes NTP
+
+sudo nano /etc/systemd/timesyncd.conf
+[Time]
+NTP=( Your Time Server )
+
+
+
 # Gateway nodes (inside) & (outside) networks.
+sudo nano /etc/netplan/*.yaml
+network:
+  ethernets:
+    eth0:
+    # outside
+      addresses:
+      - 192.168.1.11/24
+      routes:
+      - to: default
+        via: 192.168.1.1
+      nameservers:
+        addresses:
+        - 8.8.8.8
+        - 8.8.4.4
+        search:
+        - .local
+      renderer: NetworkManager
+    eth1:
+    # inside
+      addresses:
+      - 192.168.3.1/24
+  version: 2
+  
+
+
+# Gateway nodes (inside) & (outside) networks.
+sudo nano /etc/netplan/*.yaml
+
+network:
+  ethernets:
+    eth0:
+    # inside 
+      addresses:
+      - 192.168.3.11/24
+      routes:
+      - to: default
+        via: 192.168.1.1
+      nameservers:
+        addresses:
+        - 8.8.8.8
+        - 8.8.4.4
+        search:
+        - .local
+      renderer: NetworkManager
+  version: 2
+
+
 
 ```
 ## [firewalld](https://firewalld.org/)
