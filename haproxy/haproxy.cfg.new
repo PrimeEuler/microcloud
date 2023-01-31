@@ -1,94 +1,132 @@
-# Example configuration for a possible web application.  See the
-# full configuration options online.
-#
-#   https://www.haproxy.org/download/1.8/doc/configuration.txt
-#
-#---------------------------------------------------------------------
-
-#---------------------------------------------------------------------
-# Global settings
-#---------------------------------------------------------------------
 global
-    # to have these messages end up in /var/log/haproxy.log you will
-    # need to:
-    #
-    # 1) configure syslog to accept network log events.  This is done
-    #    by adding the '-r' option to the SYSLOGD_OPTIONS in
-    #    /etc/sysconfig/syslog
-    #
-    # 2) configure local2 events to go to the /var/log/haproxy.log
-    #   file. A line like the following can be added to
-    #   /etc/sysconfig/syslog
-    #
-    #    local2.*                       /var/log/haproxy.log
-    #
-    log         127.0.0.1 local2
+        log /dev/log    local0
+        log /dev/log    local1 notice
+        chroot /var/lib/haproxy
+        stats socket /run/haproxy/admin.sock mode 660 level admin expose-fd listeners
+        stats timeout 30s
+        user haproxy
+        group haproxy
+        daemon
 
-    chroot      /var/lib/haproxy
-    pidfile     /var/run/haproxy.pid
-    maxconn     4000
-    user        haproxy
-    group       haproxy
-    daemon
+        # Default SSL material locations
+        ca-base /etc/ssl/certs
+        crt-base /etc/ssl/private
 
-    # turn on stats unix socket
-    stats socket /var/lib/haproxy/stats
+        # See: https://ssl-config.mozilla.org/#server=haproxy&server-version=2.0.3&config=intermediate
+        ssl-default-bind-ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384
+        ssl-default-bind-ciphersuites TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256
+        ssl-default-bind-options ssl-min-ver TLSv1.2 no-tls-tickets
 
-    # utilize system-wide crypto-policies
-    ssl-default-bind-ciphers PROFILE=SYSTEM
-    ssl-default-server-ciphers PROFILE=SYSTEM
-
-#---------------------------------------------------------------------
-# common defaults that all the 'listen' and 'backend' sections will
-# use if not designated in their block
-#---------------------------------------------------------------------
 defaults
-    mode                    http
-    log                     global
-    option                  httplog
-    option                  dontlognull
-    option http-server-close
-    option forwardfor       except 127.0.0.0/8
-    option                  redispatch
-    retries                 3
-    timeout http-request    10s
-    timeout queue           1m
-    timeout connect         10s
-    timeout client          1m
-    timeout server          1m
-    timeout http-keep-alive 10s
-    timeout check           10s
-    maxconn                 3000
+        log     global
+        mode    http
+        option  httplog
+        option  dontlognull
+        timeout connect 5000
+        timeout client  50000
+        timeout server  50000
+        errorfile 400 /etc/haproxy/errors/400.http
+        errorfile 403 /etc/haproxy/errors/403.http
+        errorfile 408 /etc/haproxy/errors/408.http
+        errorfile 500 /etc/haproxy/errors/500.http
+        errorfile 502 /etc/haproxy/errors/502.http
+        errorfile 503 /etc/haproxy/errors/503.http
+        errorfile 504 /etc/haproxy/errors/504.http
 
 
-frontend k8s-http 
-         mode tcp 
-         option tcplog 
-         bind 10.0.0.141:80 
-         default_backend k8s-80
+
+frontend k8s-http
+        mode tcp
+        option tcplog
+        bind 192.168.1.118:80
+        default_backend k8s-80
  
-frontend k8s-https 
-        mode tcp 
-        bind 10.0.0.141:443
+frontend k8s-https
+        mode tcp
+        bind 192.168.1.118:443
         # ssl crt /home/primeeuler/haproxy/tls.pem
         default_backend k8s-443
         # option forwardfor
         option tcplog
+        # use_backend k8s-80    if !{​​​ ssl_fc }​​​​​​​​​​
+        # use_backend k8s-443   if {​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​ ssl_fc }​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​
+ 
 
+        #tcp-request inspect-delay 5s
+        #tcp-request content accept if {​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​ req_ssl_hello_type 1 }​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​
+        # use_backend k8s-443 if {​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​ req_ssl_sni -i confluxio.net }​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​
+        # use_backend k8s-443 if {​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​ req_ssl_sni -i ui.confluxio.net }​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​
+        # use_backend k8s-443 if {​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​ req_ssl_sni -i dark8s.confluxio.net }​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​
+        # use_backend k8s-443 if {​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​ req_ssl_sni -i sync.confluxio.net }​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​
+        # default_backend ocserv
 
+frontend k8s-apiserver 
+        mode tcp
+        bind :::16443 v4v6
+        # use tcp content accepts to detects ssl client and server hello.
+        tcp-request inspect-delay 5s 
+        tcp-request content accept if { req_ssl_hello_type 1 }
+        default_backend k8s-apiserver_https
 
 backend k8s-80
-        mode tcp
-        balance roundrobin 
-        server rp2 192.168.3.2:80 check send-proxy 
-        server rp3 192.168.3.3:80 check send-proxy 
-        server rp4 192.168.3.4:80 check send-proxy
+        balance roundrobin
+        server  rp2   192.168.3.2:80 check send-proxy
+        server  rp3   192.168.3.3:80 check send-proxy
+        server  rp4   192.168.3.4:80 check send-proxy
  
-backend k8s-443 
-        mode tcp 
-        balance roundrobin 
-        option ssl-hello-chk 
-        server rp2 192.168.3.2:443 check send-proxy 
-        server rp3 192.168.3.3:443 check send-proxy
-        server rp4 192.168.3.4:443 check send-proxy
-[primeeuler@vpn-gateway ~]$ 
+backend k8s-443
+        mode tcp
+        balance roundrobin
+        option ssl-hello-chk
+        server  rp2   192.168.3.2:443 check send-proxy
+        server  rp3   192.168.3.3:443 check send-proxy
+        server  rp4   192.168.3.4:443 check send-proxy
+ 
+backend k8s-apiserver_https 
+        mode tcp
+        # maximum SSL session ID length is 32 bytes.
+        stick-table type binary len 32 size 30k expire 30m 
+
+        acl clienthello req_ssl_hello_type 1 
+        acl serverhello rep_ssl_hello_type 2
+
+        # use tcp content accepts to detects ssl client and server hello.
+        tcp-request inspect-delay 5s 
+        tcp-request content accept if clienthello
+
+        # no timeout on response inspect delay by default.
+        tcp-response content accept if serverhello
+
+        # SSL session ID (SSLID) may be present on a client or server hello. 
+        # Its length is coded on 1 byte at offset 43 and its value starts at offset 44. 
+        # Match and learn on request if client hello.
+        stick on payload_lv(43,1) if clienthello
+
+        # learn on response if server hello.
+        stick store-response payload_lv(43,1) if serverhello
+ 
+        server rp2 192.168.3.2:16443 check inter 5s downinter 5s fall 3 rise 3
+        server rp3 192.168.3.3:16443 check inter 5s downinter 5s fall 3 rise 3
+        server rp4 192.168.3.4:16443 check inter 5s downinter 5s fall 3 rise 3
+
+
+
+
+
+
+
+# backend ocserv
+       # mode tcp
+       # option ssl-hello-chk
+       # server ocserv 127.0.0.1:443 send-proxy
+ 
+listen stats
+        #mode http
+        bind 192.168.1.118:8080
+        # ssl crt /etc/ssl/certs/haproxy.pem
+        stats enable                    # enable statistics reports
+        stats hide-version              # Hide the version of HAProxy
+        stats refresh 30s               # HAProxy refresh time
+        stats show-node                 # Shows the hostname of the node
+        stats auth haadmin:P@ssword     # Enforce Basic authentication for Stats page
+        stats uri /                     # Statistics URL
