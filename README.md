@@ -17,7 +17,7 @@ graph TD;
 
 | ID  | TASK | DESCRIPTION | 
 | --- | ---- | ----------- |
-| [1](#network) | Configure network on all nodes | Gateway nodes get <<inside>> and <<outside>> networks. Microk8s nodes get <<inside>> network.
+| [1](#network) | Configure network on all nodes | Gateway nodes get (inside) and (outside) networks. Microk8s nodes get (inside) network.
 | [2](#firewalld) | Install firewalld on all nodes | Firewalld provides a dynamically managed firewall with support for network/firewall zones that define the trust level of network connections or interfaces | 
 | [3](#cockpit) | Install cockpit on all nodes | Cockpit is a web-based graphical interface for servers | 
 | [4](#libreswan) | Install libreswan on gateway nodes | Libreswan is a free software implementation of the most widely supported and standardized VPN protocol using "IPsec" and the Internet Key Exchange ("IKE") | 
@@ -27,7 +27,7 @@ graph TD;
 
 ## [netplan](https://netplan.io/)
 ```shell
-# Gateway nodes '<inside>' & '<outside>'
+# Gateway nodes (inside) & (outside) networks.
 
 ```
 ## [firewalld](https://firewalld.org/)
