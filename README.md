@@ -88,14 +88,14 @@ sudo netplan try
 # All nodes hosts entries
 sudo nano /etc/hosts
 
-//gws zone = public
+# gws zone = public
 192.168.1.11 gw-1
 192.168.1.12 gw-2
 
-//gws zone = trusted 
+# gws zone = trusted 
 192.168.3.1 = vrrp
 
-//mk8s zone = public
+# mk8s zone = public
 192.168.3.11 mk8s-1
 192.168.3.12 mk8s-2
 192.168.3.13 mk8s-3
