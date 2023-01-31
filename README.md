@@ -125,7 +125,7 @@ sudo firewall-cmd --reload
 sudo apt-get install cockpit
 
 sudo firewall-cmd --add-service cockpit --permanent
-
+sudo firewall-cmd --reload
 ```
 ## [libreswan](https://libreswan.org/)
 ```shell
