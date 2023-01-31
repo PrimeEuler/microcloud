@@ -45,7 +45,7 @@ NTP=( Your Time Server )
 
 
 
-# Gateway nodes (inside) & (outside) networks.
+# Gateway nodes configure (inside) & (outside) networks
 sudo nano /etc/netplan/*.yaml
 network:
   ethernets:
@@ -74,7 +74,7 @@ network:
   
 
 
-# Gateway nodes (inside) & (outside) networks.
+# Microk8s nodes configure (inside) network
 sudo nano /etc/netplan/*.yaml
 
 network:
