@@ -11,8 +11,10 @@ graph TD;
     D(mk8s-1);
     E(mk8s-2);
     F(mk8s-3);
+    V(vrrp)
     A-->B & C;
     B & C-->D & E & F;
+    N->B & C;
 ```
 
 | ID  | TASK | DESCRIPTION | 
