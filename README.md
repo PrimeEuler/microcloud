@@ -6,11 +6,11 @@ A runbook to deploy a 3 node HA microk8s cluster (mk8s1-3) and a 2 node HA VPN g
 %%{init: {'theme':'dark'}}%%
 graph TD;
     A(vip);
-    B(gw1);
-    C(gw2);
-    D(mk8s1);
-    E(mk8s2);
-    F(mk8s3);
+    B(gw-1);
+    C(gw-2);
+    D(mk8s-1);
+    E(mk8s-2);
+    F(mk8s-3);
     A-->B & C;
     B & C-->D & E & F;
 ```
@@ -49,8 +49,8 @@ network:
     # inside
       addresses:
       - 192.168.3.1/24
-      # gw1 192.168.3.2
-      # gw2 192.168.3.3
+      # gw-1 192.168.3.2
+      # gw-2 192.168.3.3
       # VRRP 192.168.3.1 (FRRouting)
   version: 2
   renderer: NetworkManager
@@ -88,11 +88,17 @@ sudo netplan try
 # All nodes hosts entries
 sudo nano /etc/hosts
 
-192.168.1.11 gw1
-192.168.2.12 gw2
-192.168.3.11 mk8s1
-192.168.3.12 mk8s2
-192.168.3.13 mk8s3
+//gws zone = public
+192.168.1.11 gw-1
+192.168.1.12 gw-2
+
+//gws zone = trusted 
+192.168.3.1 = vrrp
+
+//mk8s zone = public
+192.168.3.11 mk8s-1
+192.168.3.12 mk8s-2
+192.168.3.13 mk8s-3
 
 
 # All nodes NTP
