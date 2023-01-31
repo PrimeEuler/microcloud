@@ -78,6 +78,8 @@ network:
         - .local
   version: 2
   renderer: NetworkManager
+  
+  
 sudo netplan try
 [enter]
 
