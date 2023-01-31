@@ -27,23 +27,6 @@ graph TD;
 
 ## [netplan](https://netplan.io/)
 ```shell
-# All nodes hosts entries
-sudo nano /etc/hosts
-
-192.168.1.11 gw1
-192.168.2.12 gw2
-192.168.3.11 mk8s1
-192.168.3.12 mk8s2
-192.168.3.13 mk8s3
-
-
-# All nodes NTP
-
-sudo nano /etc/systemd/timesyncd.conf
-[Time]
-NTP=( Your Time Server )
-
-
 
 # Gateway nodes configure (inside) & (outside) networks
 sudo nano /etc/netplan/*.yaml
@@ -95,6 +78,23 @@ network:
       renderer: NetworkManager
   version: 2
 
+
+
+# All nodes hosts entries
+sudo nano /etc/hosts
+
+192.168.1.11 gw1
+192.168.2.12 gw2
+192.168.3.11 mk8s1
+192.168.3.12 mk8s2
+192.168.3.13 mk8s3
+
+
+# All nodes NTP
+
+sudo nano /etc/systemd/timesyncd.conf
+[Time]
+NTP=( Your Time Server )
 
 
 ```
