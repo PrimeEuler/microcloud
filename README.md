@@ -123,6 +123,8 @@ sudo firewall-cmd --reload
 ## [cockpit](https://cockpit-project.org/)
 ```shell
 sudo apt-get install cockpit
+
+sudo firewall-cmd --add-service cockpit
 ```
 ## [libreswan](https://libreswan.org/)
 ```shell
