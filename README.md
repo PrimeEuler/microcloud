@@ -180,6 +180,22 @@ su - $USER
 # microk8s servces for firewalld
 sudo cp services/*.xml  /usr/lib/firewalld/services/ 
 
+sudo firewall-cmd --zone=public --permanent --add-service=http 
+sudo firewall-cmd --zone=public --permanent --add-service=https 
+sudo firewall-cmd --zone=public --permanent --add-service=mk8s-apiserver 
+sudo firewall-cmd --zone=public --permanent --add-service=mk8s-calico 
+sudo firewall-cmd --zone=public --permanent --add-service=mk8s-cluster-agent 
+sudo firewall-cmd --zone=public --permanent --add-service=mk8s-dqlite 
+sudo firewall-cmd --zone=public --permanent --add-service=mk8s-etcd 
+sudo firewall-cmd --zone=public --permanent --add-service=mk8s-kube-controller 
+sudo firewall-cmd --zone=public --permanent --add-service=mk8s-kube-scheduler 
+sudo firewall-cmd --zone=public --permanent --add-service=mk8s-kubelet-r 
+sudo firewall-cmd --zone=public --permanent --add-service=mk8s-kubelet-rw 
+sudo firewall-cmd --zone=public --permanent --add-service=mk8s-observability 
+sudo firewall-cmd --reload
+
+
+
 # calico vxlan firewalld rules
 sudo firewall-cmd --zone=trusted --add-interface=vxlan.calico --permanent
 
