@@ -17,13 +17,22 @@ graph TD;
 
 | ID  | TASK | DESCRIPTION | 
 | --- | ---- | ----------- |
-| [1](#netplan) | Configure network on all nodes | Gateway nodes get (inside) and (outside) networks. Microk8s nodes get (inside) network.
-| [2](#firewalld) | Install firewalld on all nodes | Firewalld provides a dynamically managed firewall with support for network/firewall zones that define the trust level of network connections or interfaces | 
-| [3](#cockpit) | Install cockpit on all nodes | Cockpit is a web-based graphical interface for servers | 
+| [1](#cockpit) | Install cockpit on all nodes | Cockpit is a web-based graphical interface for servers | 
+| [2](#netplan) | Configure network on all nodes | Gateway nodes get (inside) and (outside) networks. Microk8s nodes get (inside) network.
+| [3](#firewalld) | Install firewalld on all nodes | Firewalld provides a dynamically managed firewall with support for network/firewall zones that define the trust level of network connections or interfaces | 
 | [4](#libreswan) | Install libreswan on gateway nodes | Libreswan is a free software implementation of the most widely supported and standardized VPN protocol using "IPsec" and the Internet Key Exchange ("IKE") | 
 | [5](#frrouting) | Install frrouting on gateway nodes | FRRouting (FRR) is a free and open source Internet routing protocol suite for Linux and Unix platforms. It implements BGP, OSPF, RIP, IS-IS, PIM, LDP, BFD, Babel, PBR, OpenFabric and VRRP, with alpha support for EIGRP and NHRP |
 | [6](#haproxy) | Install haproxy on gateway nodes | HAProxy is a free, very fast and reliable reverse-proxy offering high availability, load balancing, and proxying for TCP and HTTP-based applications |
 | [7](#microk8s) | Install microk8s on microk8s nodes | Microk8s is zero-ops, pure-upstream Kubernetes, from developer workstations to production. |
+
+
+## [cockpit](https://cockpit-project.org/)
+```shell
+sudo apt-get install cockpit
+
+sudo systemctl start cockpit
+
+```
 
 ## [netplan](https://netplan.io/)
 ```shell
@@ -116,6 +125,11 @@ sudo apt-get install firewalld
 # enable logging
 sudo firewall-cmd --set-log-denied=all
 
+# enable cockpit
+sudo firewall-cmd --add-service cockpit --permanent
+sudo firewall-cmd --reload
+
+
 # Enable IP Rorwarding on gateway nodes only
 sudo nano /etc/sysctl.conf
 
@@ -133,13 +147,6 @@ sysctl -p
 sudo firewall-cmd --add-masquerade --permanent
 
 firewall-cmd --permanent --zone=trusted --change-interface=(inside)
-sudo firewall-cmd --reload
-```
-## [cockpit](https://cockpit-project.org/)
-```shell
-sudo apt-get install cockpit
-
-sudo firewall-cmd --add-service cockpit --permanent
 sudo firewall-cmd --reload
 ```
 ## [libreswan](https://libreswan.org/)
