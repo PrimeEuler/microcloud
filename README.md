@@ -212,5 +212,18 @@ sudo firewall-cmd --zone=trusted --add-interface=vxlan.calico --permanent
 # calico pod networks
 sudo firewall-cmd --zone=trusted --add-source=10.0.0.0/8  --permanent 
 sudo firewall-cmd --reload
+
+# Add VRRP address to certificates for external access
+sudo nano /var/snap/micrk8s/current/certs/csr.conf.template
+# MOREIP
+IP.9 = < VRRP IP >
+
+# Microk8s should auto refresh the certs. 
+# Add nodes to the cluster after all certs have been updated with VRRP IP
+
+microk8s.add-node
+
+
+
 ```
 
