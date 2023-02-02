@@ -214,7 +214,7 @@ sudo firewall-cmd --zone=trusted --add-source=10.0.0.0/8  --permanent
 sudo firewall-cmd --reload
 
 # Add VRRP address to certificates for external access
-sudo nano /var/snap/micrk8s/current/certs/csr.conf.template
+sudo nano /var/snap/microk8s/current/certs/csr.conf.template
 # MOREIP
 IP.9 = < VRRP IP >
 
