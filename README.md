@@ -32,6 +32,8 @@ sudo apt-get install cockpit
 
 sudo systemctl start cockpit
 
+# The rest of the configuration can be done via cockpit terminal. https://<host ip>:9090
+
 ```
 
 ## [netplan](https://netplan.io/)
@@ -63,6 +65,7 @@ network:
       # VRRP 192.168.3.1 (FRRouting)
   version: 2
   renderer: NetworkManager
+  # cockpit uses NetworkManager
   
 sudo netplan try
 [enter]
@@ -87,7 +90,7 @@ network:
         - .local
   version: 2
   renderer: NetworkManager
-  
+  # cockpit uses NetworkManager
   
 sudo netplan try
 [enter]
