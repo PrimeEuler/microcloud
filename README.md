@@ -149,7 +149,10 @@ sysctl -p
 # Enable IP masquerade on gateway nodes only
 sudo firewall-cmd --add-masquerade --permanent
 
+# Accept all traffic on mk8s default gateway interface
 firewall-cmd --permanent --zone=trusted --change-interface=(inside)
+
+# apply
 sudo firewall-cmd --reload
 ```
 ## [libreswan](https://libreswan.org/)
