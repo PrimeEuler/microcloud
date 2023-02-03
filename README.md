@@ -218,9 +218,11 @@ sudo nano /var/snap/microk8s/current/certs/csr.conf.template
 # MOREIP
 IP.9 = < VRRP IP >
 
-# Microk8s should auto refresh the certs. 
-# Add nodes to the cluster after all certs have been updated with VRRP IP
+# Microk8s should auto refresh the certs. verify cert conf file
+sudo cat sudo nano /var/snap/microk8s/current/certs/csr.conf
 
+
+# Add nodes to the cluster after all certs have been updated with VRRP IP
 microk8s.add-node
 
 
