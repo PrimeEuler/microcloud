@@ -161,6 +161,10 @@ sudo firewall-cmd --reload
 # sudo apt-get install linux-modules-extra-5.15.0-1017-raspi
 
 sudo apt-get install libreswan
+
+# ipsec tunnel to OCI vm for hybrid cloud
+sudo cp ipsec.d/ocigw.cconf  /etc/ipsec.d/
+
 ```
 ## [frrouting](https://frrouting.org/)
 ```shell
