@@ -175,6 +175,9 @@ sudo nano /etc/frr/daemons
 
 bgpd=yes
 
+# bgp peering through ipsec tunnel to OCI vm
+sudo cp frr/frr.cong  /etc/frr/
+
 sudo systemctl restart frr
 ```
 ### [haproxy](https://www.haproxy.org/)
