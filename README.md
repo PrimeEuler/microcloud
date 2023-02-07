@@ -255,6 +255,8 @@ kubectl edit -n ingress nginx-load-balancer-microk8s-conf
 data:
   use-proxy-protocol: "true"
 
+# add ingress rule for grafana observability access
+kubectl apply -f microk8s/grafana-ingress.yaml
 
 
 ```
