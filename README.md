@@ -255,8 +255,24 @@ kubectl edit -n ingress nginx-load-balancer-microk8s-conf
 data:
   use-proxy-protocol: "true"
 
+# https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/
+# install kubectl on gateway nodes to remote manage microk8s
+
+# Download the Google Cloud public signing key
+sudo curl -fsSLo /etc/apt/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
+
+# Add the Kubernetes apt repository:
+echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list\
+
+# Update apt package index with the new repository and install kubectl:
+sudo apt-get update
+sudo apt-get install -y kubectl
+
+
 # add ingress rule for grafana observability access
 kubectl apply -f microk8s/grafana-ingress.yaml
+
+
 
 
 ```
