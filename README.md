@@ -242,6 +242,19 @@ sudo cat sudo nano /var/snap/microk8s/current/certs/csr.conf
 # Add nodes to the cluster after all certs have been updated with VRRP IP
 microk8s.add-node
 
+# after cluster is formed enable dns, metric server, ingress and observability
+
+microk8s.enable dns 
+microk8s.enable ingrss
+microk8s.enable metrics-server
+microk8s.enable observability 
+
+# add proxy protocol on ingress loadbalancer config
+kubectl edit -n ingress nginx-load-balancer-microk8s-conf
+
+data:
+  use-proxy-protocol: "true"
+
 
 
 ```
