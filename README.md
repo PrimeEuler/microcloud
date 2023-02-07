@@ -176,7 +176,7 @@ sudo nano /etc/frr/daemons
 bgpd=yes
 
 # bgp peering through ipsec tunnel to remote microcloud gateway
-sudo cp frr/frr.cong  /etc/frr/
+sudo cp frr/frr.conf  /etc/frr/
 
 sudo systemctl restart frr
 ```
