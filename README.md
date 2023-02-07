@@ -183,6 +183,13 @@ sudo systemctl restart frr
 ### [haproxy](https://www.haproxy.org/)
 ```shell
 sudo apt-get install haproxy
+
+# edit and load config for 80,443 with proxy protocol and 16443 for API access
+sudo cp haproxy/haproxy.cfg  /etc/haproxy
+
+sudo systemctl enable haproxy
+sudo systemctl restart haproxy
+
 ```
 ### [microk8s](https://microk8s.io/docs/getting-started)
 ```shell
