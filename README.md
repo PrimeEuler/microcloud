@@ -269,6 +269,12 @@ sudo apt-get update
 sudo apt-get install -y kubectl
 
 
+# copy config to $HOME/.kube/config
+microk8s.config
+
+# edit cluster VIP adress for API 16443
+server: https://192.168.1.11:16443
+
 # add ingress rule for grafana observability access
 kubectl apply -f microk8s/grafana-ingress.yaml
 
