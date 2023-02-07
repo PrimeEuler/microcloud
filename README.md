@@ -162,7 +162,7 @@ sudo firewall-cmd --reload
 
 sudo apt-get install libreswan
 
-# ipsec tunnel to OCI vm for hybrid cloud
+# ipsec tunnel to remote microcloud gateway
 sudo cp ipsec.d/ocigw.cconf  /etc/ipsec.d/
 
 ```
@@ -175,7 +175,7 @@ sudo nano /etc/frr/daemons
 
 bgpd=yes
 
-# bgp peering through ipsec tunnel to OCI vm
+# bgp peering through ipsec tunnel to remote microcloud gateway
 sudo cp frr/frr.cong  /etc/frr/
 
 sudo systemctl restart frr
