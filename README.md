@@ -250,7 +250,7 @@ microk8s.enable metrics-server
 microk8s.enable observability 
 
 # add proxy protocol on ingress loadbalancer config
-kubectl edit -n ingress nginx-load-balancer-microk8s-conf
+kubectl edit configmap -n ingress nginx-load-balancer-microk8s-conf
 
 data:
   use-proxy-protocol: "true"
