@@ -33,10 +33,6 @@ sudo apt-get install cockpit
 
 sudo systemctl start cockpit
 ```
-
-
-
-
 ## [netplan](https://netplan.io/)
 #### Configure the gateway nodes public and trusted networks. 
 ```shell
@@ -71,7 +67,7 @@ sudo netplan try
 [enter]
 ```
 #### Configure microk8s nodes public network.
-```
+```shell
 sudo nano /etc/netplan/*.yaml
 
 network:
@@ -97,7 +93,7 @@ sudo netplan try
 [enter]
 ```
 #### Configure all nodes hosts files to match.
-```
+```shell
 sudo nano /etc/hosts
 
 # gws zone = public
@@ -113,7 +109,7 @@ sudo nano /etc/hosts
 192.168.3.13 mk8s-3
 ```
 #### Configure all nodes to use the same NTP server.
-```
+```shell
 sudo nano /etc/systemd/timesyncd.conf
 [Time]
 NTP= ${ntp_server_ip}
@@ -122,15 +118,20 @@ NTP= ${ntp_server_ip}
 #### Intsall firewalld on all nodes. Configure logging and add cockpit as a service. 
 ```shell
 sudo apt-get install firewalld
-
-# enable logging
+```
+#### Enable logging.
+```shell
 sudo firewall-cmd --set-log-denied=all
-
-# enable cockpit
+```
+#### Add the cockpit service to the public interface.
+```shell
 sudo firewall-cmd --add-service cockpit --permanent
+```
+#### Apply the firewalld configuration.
+```shell
 sudo firewall-cmd --reload
 ```
-# Configure IP forwarding on gateway nodes only. This enables the gateways to preform IP routing.
+#### Configure IP forwarding on gateway nodes only. This enables the gateways to preform IP routing.
 ```
 sudo nano /etc/sysctl.conf
 
