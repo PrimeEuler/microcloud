@@ -24,7 +24,7 @@ graph TD;
 | [5](#frrouting) | Install frrouting on gateway nodes | FRRouting (FRR) is a free and open source Internet routing protocol suite for Linux and Unix platforms. It implements BGP, OSPF, RIP, IS-IS, PIM, LDP, BFD, Babel, PBR, OpenFabric and VRRP, with alpha support for EIGRP and NHRP |
 | [6](#haproxy) | Install haproxy on gateway nodes | HAProxy is a free, very fast and reliable reverse-proxy offering high availability, load balancing, and proxying for TCP and HTTP-based applications |
 | [7](#microk8s) | Install microk8s on microk8s nodes | Microk8s is zero-ops, pure-upstream Kubernetes, from developer workstations to production. |
-
+| [8](#kubectl) | Install kubectl on gateway nodes | Kubectl is a command line tool for communicating with a Kubernetes cluster's control plane, using the Kubernetes API. |
 
 ## [cockpit](https://cockpit-project.org/)
 #### 1. Start with the gateway to build access to the rest of the cluster. Once the gateway is complete, the rest of hosts can be managed from cockpit. https://192.168.1.11:9090
@@ -260,7 +260,7 @@ sudo firewall-cmd --zone=trusted --add-source=10.0.0.0/8  --permanent
 sudo firewall-cmd --reload
 ```
 
-#### 10. Add VRRP address from the haproxy proxy to the certificates for external API access
+#### 10. Add VRRP address from haproxy to the certificates for external API access
 ```shell
 sudo nano /var/snap/microk8s/current/certs/csr.conf.template
 # MOREIP
@@ -288,30 +288,34 @@ microk8s.kubectl edit configmap -n ingress nginx-load-balancer-microk8s-conf
 data:
   use-proxy-protocol: "true"
 ```
-# https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/
-# install kubectl on gateway nodes to remote manage microk8s
-
-# Download the Google Cloud public signing key
+# [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/)
+#### 1. Download the Google Cloud public signing key
+```shell
 sudo curl -fsSLo /etc/apt/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
-
-# Add the Kubernetes apt repository:
+```
+#### 2. Add the Kubernetes apt repository.
+```shell
 echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list\
-
-# Update apt package index with the new repository and install kubectl:
+```
+#### 3. Update apt package index with the new repository and install kubectl.
+```shell
 sudo apt-get update
 sudo apt-get install -y kubectl
-
-
-# copy config to $HOME/.kube/config
+```
+#### 4. Copy configuration from a microk8s node.
+```shell
 microk8s.config
-
-# edit cluster VIP adress for API 16443
+```
+#### 5. Paste contents into the $HOME/.kube/config file and change IP to VRRP IP
+```shell
 sudo nano $HOME/.kube/config
 
 server: https://192.168.1.11:16443
-
-# add ingress rule for grafana observability access
+```
+#### 6. Add ingress rule for grafana observability access.
+```shell
 kubectl apply -f microk8s/grafana-ingress.yaml
+```
 
 
 
