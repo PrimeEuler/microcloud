@@ -115,23 +115,23 @@ sudo nano /etc/systemd/timesyncd.conf
 NTP= ${ntp_server_ip}
 ```
 ## [firewalld](https://firewalld.org/)
-#### Intsall firewalld on all nodes. Configure logging and add cockpit as a service. 
+#### 1. Intsall firewalld on all nodes. Configure logging and add cockpit as a service. 
 ```shell
 sudo apt-get install firewalld
 ```
-#### Enable logging.
+#### 2. Enable logging.
 ```shell
 sudo firewall-cmd --set-log-denied=all
 ```
-#### Add the cockpit service to the public interface.
+#### 3. Add the cockpit service to the public interface.
 ```shell
 sudo firewall-cmd --add-service cockpit --permanent
 ```
-#### Apply the firewalld configuration.
+#### 4. Apply the firewalld configuration.
 ```shell
 sudo firewall-cmd --reload
 ```
-#### Configure IP forwarding on gateway nodes only. This enables the gateways to preform IP routing.
+#### 5. Configure IP forwarding on gateway nodes only. This enables the gateways to preform IP routing.
 ```
 sudo nano /etc/sysctl.conf
 
@@ -145,15 +145,15 @@ net.ipv4.conf.default.accept_redirects = 0
 
 sysctl -p
 ````
-# Configure IP masquerade on the gateway nodes only. This will allow the gateway to preform network address translation (NAT) for the cluster network.
+#### 6. Configure IP masquerade on the gateway nodes only. This will allow the gateway to preform network address translation (NAT) for the cluster network.
 ```
 sudo firewall-cmd --add-masquerade --permanent
 ```
-# Configure the gateway nodes to accept all traffic from the cluster netork.
+#### 7. Configure the gateway nodes to accept all traffic from the cluster netork.
 ```
 firewall-cmd --permanent --zone=trusted --change-interface=eth1
 ```
-# Apply the firewalld configuration.
+#### 8. Apply the firewalld configuration.
 ```
 sudo firewall-cmd --reload
 ```
