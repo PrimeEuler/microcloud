@@ -169,7 +169,7 @@ sudo apt-get install linux-modules-extra-5.15.0-1017-raspi
 ````
 #### 3. Configure IP addreses and secrets for remote gateway.
 ```shell
-sudo cp ipsec.d/ocigw.cconf  /etc/ipsec.d/
+sudo cp ipsec.d/ocigw.conf  /etc/ipsec.d/
 ```
 #### 4. Enable the ipsec service and restart to apply configuration changes.
 ```shell
