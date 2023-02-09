@@ -32,7 +32,9 @@ sudo apt-get install cockpit
 
 sudo systemctl start cockpit
 ```
-#### The rest of the configuration can be done via cockpit terminal. https://<host ip>:9090
+#### Start with a gateway to build access to the rest of the cluster.
+#### Onec a gateway is complete, the rest of hosts can be managed from cockpit.
+#### https://192.168.1.11:9090
 
 
 
