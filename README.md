@@ -27,7 +27,7 @@ graph TD;
 
 
 ## [cockpit](https://cockpit-project.org/)
-#### Start with the gateway to build access to the rest of the cluster. Onec the gateway is complete, the rest of hosts can be managed from cockpit. https://192.168.1.11:9090
+#### Start with the gateway to build access to the rest of the cluster. Once the gateway is complete, the rest of hosts can be managed from cockpit. https://192.168.1.11:9090
 ```shell
 sudo apt-get install cockpit
 
@@ -38,14 +38,13 @@ sudo systemctl start cockpit
 
 
 ## [netplan](https://netplan.io/)
+#### Configure the gateway nodes public and trusted networks. 
 ```shell
-
-# Gateway nodes configure (inside) & (outside) networks
 sudo nano /etc/netplan/*.yaml
 network:
   ethernets:
     eth0:
-    # outside
+    # public zone
       addresses:
       - 192.168.1.11/24
       routes:
@@ -58,7 +57,7 @@ network:
         search:
         - .local
     eth1:
-    # inside
+    # trusted zone
       addresses:
       - 192.168.3.1/24
       # gw-1 192.168.3.2
@@ -70,14 +69,15 @@ network:
   
 sudo netplan try
 [enter]
-
-# Microk8s nodes configure (inside) network
+```
+#### Configure microk8s nodes public network.
+```
 sudo nano /etc/netplan/*.yaml
 
 network:
   ethernets:
     eth0:
-    # inside 
+    # public 
       addresses:
       - 192.168.3.11/24
       routes:
@@ -95,10 +95,9 @@ network:
   
 sudo netplan try
 [enter]
-
-
-
-# All nodes hosts entries
+```
+#### Configure all nodes hosts files to match.
+```
 sudo nano /etc/hosts
 
 # gws zone = public
@@ -112,15 +111,12 @@ sudo nano /etc/hosts
 192.168.3.11 mk8s-1
 192.168.3.12 mk8s-2
 192.168.3.13 mk8s-3
-
-
-# All nodes NTP
-
+```
+#### COnfigure all nodes to use the same NTP server.
+```
 sudo nano /etc/systemd/timesyncd.conf
 [Time]
-NTP=( Your Time Server )
-
-
+NTP= ${ntp_server_ip}
 ```
 ## [firewalld](https://firewalld.org/)
 ```shell
