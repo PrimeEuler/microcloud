@@ -131,29 +131,30 @@ sudo firewall-cmd --add-service cockpit --permanent
 ```shell
 sudo firewall-cmd --reload
 ```
-#### 5. Configure IP forwarding on gateway nodes only. This enables the gateways to preform IP routing.
-```
+#### 5. Configure IP forwarding on gateway nodes only. This enables the gateways to preform IP routing. Disable ICMP redirects to prevent attackers from hijacking the routing table.
+```shell
 sudo nano /etc/sysctl.conf
 
 net.ipv4.ip_forward=1
 
-# Attackers could use bogus ICMP redirect messages to maliciously alter the system routing tables
 net.ipv4.conf.all.accept_redirects = 0
 net.ipv4.conf.all.send_redirects = 0
 net.ipv4.conf.default.send_redirects = 0
 net.ipv4.conf.default.accept_redirects = 0
-
+```
+#### 6. Apply the system configuration.
+```shell
 sysctl -p
 ````
-#### 6. Configure IP masquerade on the gateway nodes only. This will allow the gateway to preform network address translation (NAT) for the cluster network.
+#### 7. Configure IP masquerade on the gateway nodes only. This will allow the gateway to preform network address translation (NAT) for the cluster network.
 ```
 sudo firewall-cmd --add-masquerade --permanent
 ```
-#### 7. Configure the gateway nodes to accept all traffic from the cluster netork.
+#### 8. Configure the gateway nodes to accept all traffic from the cluster netork.
 ```
 firewall-cmd --permanent --zone=trusted --change-interface=eth1
 ```
-#### 8. Apply the firewalld configuration.
+#### 9. Apply the firewalld configuration.
 ```
 sudo firewall-cmd --reload
 ```
