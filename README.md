@@ -289,8 +289,7 @@ data:
   use-proxy-protocol: "true"
 ```
 # [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/)
-#### Install kubectl on gateway nodes only.
-#### 1. Download the Google Cloud public signing key
+#### 1. Install kubectl on gateway nodes only. Download the Google Cloud public signing key
 ```shell
 sudo curl -fsSLo /etc/apt/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
 ```
