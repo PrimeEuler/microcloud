@@ -112,13 +112,14 @@ sudo nano /etc/hosts
 192.168.3.12 mk8s-2
 192.168.3.13 mk8s-3
 ```
-#### COnfigure all nodes to use the same NTP server.
+#### Configure all nodes to use the same NTP server.
 ```
 sudo nano /etc/systemd/timesyncd.conf
 [Time]
 NTP= ${ntp_server_ip}
 ```
 ## [firewalld](https://firewalld.org/)
+#### Intsall firewalld on all nodes. Configure logging and add cockpit as a service. 
 ```shell
 sudo apt-get install firewalld
 
@@ -128,9 +129,9 @@ sudo firewall-cmd --set-log-denied=all
 # enable cockpit
 sudo firewall-cmd --add-service cockpit --permanent
 sudo firewall-cmd --reload
-
-
-# Enable IP Rorwarding on gateway nodes only
+```
+# Configure IP forwarding on gateway nodes only. This enables the gateways to preform IP routing.
+```
 sudo nano /etc/sysctl.conf
 
 net.ipv4.ip_forward=1
@@ -142,14 +143,17 @@ net.ipv4.conf.default.send_redirects = 0
 net.ipv4.conf.default.accept_redirects = 0
 
 sysctl -p
-
-# Enable IP masquerade on gateway nodes only
+````
+# Configure IP masquerade on the gateway nodes only. This will allow the gateway to preform network address translation (NAT) for the cluster network.
+```
 sudo firewall-cmd --add-masquerade --permanent
-
-# Accept all traffic on mk8s default gateway interface
-firewall-cmd --permanent --zone=trusted --change-interface=(inside)
-
-# apply
+```
+# Configure the gateway nodes to accept all traffic from the cluster netork.
+```
+firewall-cmd --permanent --zone=trusted --change-interface=eth1
+```
+# Apply the firewalld configuration.
+```
 sudo firewall-cmd --reload
 ```
 ## [libreswan](https://libreswan.org/)
