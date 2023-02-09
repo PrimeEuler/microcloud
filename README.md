@@ -31,10 +31,10 @@ graph TD;
 sudo apt-get install cockpit
 
 sudo systemctl start cockpit
-
-# The rest of the configuration can be done via cockpit terminal. https://<host ip>:9090
-
 ```
+#### The rest of the configuration can be done via cockpit terminal. https://<host ip>:9090
+
+
 
 ## [netplan](https://netplan.io/)
 ```shell
