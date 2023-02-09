@@ -27,12 +27,13 @@ graph TD;
 
 
 ## [cockpit](https://cockpit-project.org/)
+#### Start with a gateway to build access to the rest of the cluster. Onec a gateway is complete, the rest of hosts can be managed from cockpit. https://192.168.1.11:9090
 ```shell
 sudo apt-get install cockpit
 
 sudo systemctl start cockpit
 ```
-#### Start with a gateway to build access to the rest of the cluster. Onec a gateway is complete, the rest of hosts can be managed from cockpit. https://192.168.1.11:9090
+
 
 
 
