@@ -177,7 +177,7 @@ sudo systemcrl enable ipsec
 sudo systemcrl restart ipsec
 ```
 ## [frrouting](https://frrouting.org/)
-#### 1. Install free range routing on the gateway nodes. This will enable the gateway to update routing tables with BGP. BGP peerings are configured on the tunnel interfaces to communicate with remote gateways.
+#### 1. Install free range routing on the gateway nodes.
 ```shell
 sudo apt-get install frr
 ```
@@ -187,7 +187,7 @@ sudo nano /etc/frr/daemons
 
 bgpd=yes
 ````
-#### 3. The config has BGP peerings configured on the tunnel interfaces to communicate with a remote gateway.
+#### 3. The .conf file has BGP peerings configured on the tunnel interfaces to communicate with a remote gateway.
 ```shell
 sudo cp frr/frr.conf  /etc/frr/
 ```
@@ -211,21 +211,28 @@ sudo cp haproxy/haproxy.cfg  /etc/haproxy
 sudo systemctl restart haproxy
 ```
 ### [microk8s](https://microk8s.io/docs/getting-started)
+#### 1. Install micrk8s on all cluster nodes.
 ```shell
 sudo snap install microk8s --classic --channel=1.26
-
-# join the microk8s group
+```
+#### 2. Join the microk8s group to inherit permissions.
+```shell
 sudo usermod -a -G microk8s $USER
-
-# take ownership of the config files
+```
+#### 3. Take ownership of the config file directory.
+```shell
 sudo chown -f -R $USER ~/.kube
-
-# re-enter the session
+```
+#### 4. Re-enter the session for changes to take place.
+```shell
 su - $USER
-
-# microk8s servces for firewalld
+```
+#### 5. Copy the microk8s servces into the firewalld services directory.
+```shell
 sudo cp services/*.xml  /usr/lib/firewalld/services/ 
-
+```
+#### 6. Enable all micrk8s services in firewalld.
+```shell
 sudo firewall-cmd --zone=public --permanent --add-service=http 
 sudo firewall-cmd --zone=public --permanent --add-service=https 
 sudo firewall-cmd --zone=public --permanent --add-service=mk8s-apiserver 
@@ -238,42 +245,49 @@ sudo firewall-cmd --zone=public --permanent --add-service=mk8s-kube-scheduler
 sudo firewall-cmd --zone=public --permanent --add-service=mk8s-kubelet-r 
 sudo firewall-cmd --zone=public --permanent --add-service=mk8s-kubelet-rw 
 sudo firewall-cmd --zone=public --permanent --add-service=mk8s-observability 
+```
+#### 7. Apply changes.
+```shell
 sudo firewall-cmd --reload
-
-
-
-# calico vxlan firewalld rules
+```
+#### 8. Accept all traffic from the vxlan.calico interface.
+```shell
 sudo firewall-cmd --zone=trusted --add-interface=vxlan.calico --permanent
-
-# calico pod networks
+```
+#### 9. Accept all traffic from the calico pod network subnets.
+```shell
 sudo firewall-cmd --zone=trusted --add-source=10.0.0.0/8  --permanent 
 sudo firewall-cmd --reload
+```
 
-# Add VRRP address to certificates for external access
+#### 10. Add VRRP address from the haproxy proxy to the certificates for external API access
+```shell
 sudo nano /var/snap/microk8s/current/certs/csr.conf.template
 # MOREIP
 IP.9 = < VRRP IP >
-
-# Microk8s should auto refresh the certs. verify cert conf file
+```
+#### 11. Microk8s should auto refresh the certs. Verify cert conf file contains VRRP IP.
+```shell
 sudo cat sudo nano /var/snap/microk8s/current/certs/csr.conf
-
-
-# Add nodes to the cluster after all certs have been updated with VRRP IP
+```
+#### 12. Add nodes to the primary node to form a cluster after all certs have been updated with VRRP IP. 
+```shell
 microk8s.add-node
-
-# after cluster is formed enable dns, metric server, ingress and observability
-
+```
+#### 13. After cluster is formed enable dns, metric server, ingress and observability
+```shell
 microk8s.enable dns 
 microk8s.enable ingrss
 microk8s.enable metrics-server
 microk8s.enable observability 
-
-# add proxy protocol on ingress loadbalancer config
-kubectl edit configmap -n ingress nginx-load-balancer-microk8s-conf
+```
+#### 14. Add proxy protocol support on ingress loadbalancer config.
+```shell
+microk8s.kubectl edit configmap -n ingress nginx-load-balancer-microk8s-conf
 
 data:
   use-proxy-protocol: "true"
-
+```
 # https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/
 # install kubectl on gateway nodes to remote manage microk8s
 
