@@ -177,29 +177,38 @@ sudo systemcrl enable ipsec
 sudo systemcrl restart ipsec
 ```
 ## [frrouting](https://frrouting.org/)
+#### 1. Install free range routing on the gateway nodes. This will enable the gateway to update routing tables with BGP. BGP peerings are configured on the tunnel interfaces to communicate with remote gateways.
 ```shell
 sudo apt-get install frr
-
-# Enable BGP
+```
+#### 2. Enable BGP for routing table updates.
+```shell
 sudo nano /etc/frr/daemons
 
 bgpd=yes
-
-# bgp peering through ipsec tunnel to remote microcloud gateway
+````
+#### 3. The config has BGP peerings configured on the tunnel interfaces to communicate with a remote gateway.
+```shell
 sudo cp frr/frr.conf  /etc/frr/
-
+```
+#### 4. Restart frr to apply configuration changes.
+```shell
 sudo systemctl restart frr
 ```
 ### [haproxy](https://www.haproxy.org/)
+#### 1. Install haproxy on all gateway nodes. This will enable reverse proxy capabilities on the gatways.
 ```shell
 sudo apt-get install haproxy
 
-# edit and load config for 80,443 with proxy protocol and 16443 for API access
-sudo cp haproxy/haproxy.cfg  /etc/haproxy
-
 sudo systemctl enable haproxy
+```
+#### 2. Edit and load config for 80,443 with proxy protocol and 16443 for microk8s external API access.
+```shell
+sudo cp haproxy/haproxy.cfg  /etc/haproxy
+```
+#### 3.  Restart haproxy to apply configuration changes.
+```shell
 sudo systemctl restart haproxy
-
 ```
 ### [microk8s](https://microk8s.io/docs/getting-started)
 ```shell
