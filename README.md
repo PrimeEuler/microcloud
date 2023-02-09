@@ -27,14 +27,14 @@ graph TD;
 
 
 ## [cockpit](https://cockpit-project.org/)
-#### Start with the gateway to build access to the rest of the cluster. Once the gateway is complete, the rest of hosts can be managed from cockpit. https://192.168.1.11:9090
+#### 1. Start with the gateway to build access to the rest of the cluster. Once the gateway is complete, the rest of hosts can be managed from cockpit. https://192.168.1.11:9090
 ```shell
 sudo apt-get install cockpit
 
 sudo systemctl start cockpit
 ```
 ## [netplan](https://netplan.io/)
-#### Configure the gateway nodes public and trusted networks. 
+#### 1. Configure the gateway nodes public and trusted networks. 
 ```shell
 sudo nano /etc/netplan/*.yaml
 network:
@@ -66,7 +66,7 @@ network:
 sudo netplan try
 [enter]
 ```
-#### Configure microk8s nodes public network.
+#### 2. Configure microk8s nodes public network.
 ```shell
 sudo nano /etc/netplan/*.yaml
 
@@ -92,7 +92,7 @@ network:
 sudo netplan try
 [enter]
 ```
-#### Configure all nodes hosts files to match.
+#### 3. Configure all nodes hosts files to match.
 ```shell
 sudo nano /etc/hosts
 
@@ -108,11 +108,11 @@ sudo nano /etc/hosts
 192.168.3.12 mk8s-2
 192.168.3.13 mk8s-3
 ```
-#### Configure all nodes to use the same NTP server.
+#### 4. Configure all nodes to use the same NTP server.
 ```shell
 sudo nano /etc/systemd/timesyncd.conf
 [Time]
-NTP= ${ntp_server_ip}
+NTP= $NTP_SERVER_IP
 ```
 ## [firewalld](https://firewalld.org/)
 #### 1. Intsall firewalld on all nodes. Configure logging and add cockpit as a service. 
@@ -152,22 +152,29 @@ sudo firewall-cmd --add-masquerade --permanent
 ```
 #### 8. Configure the gateway nodes to accept all traffic from the cluster netork.
 ```
-firewall-cmd --permanent --zone=trusted --change-interface=eth1
+sudo firewall-cmd --permanent --zone=trusted --change-interface=eth1
 ```
 #### 9. Apply the firewalld configuration.
 ```
 sudo firewall-cmd --reload
 ```
 ## [libreswan](https://libreswan.org/)
+#### 1. Install libreswan on the gateway nodes only. This will enable the gateway to build tunnels to other gateways for multi-cloud connectivity. 
 ```shell
-# ubuntu raspi extras not included in image
-# sudo apt-get install linux-modules-extra-5.15.0-1017-raspi
-
 sudo apt-get install libreswan
-
-# ipsec tunnel to remote microcloud gateway
+````
+#### 2. If deploying on raspberry pi hardware, you must install some extra libraries for the encryption to work. 
+```shell
+sudo apt-get install linux-modules-extra-5.15.0-1017-raspi
+````
+#### 3. Configure IP addreses and secrets for remote gateway.
+```shell
 sudo cp ipsec.d/ocigw.cconf  /etc/ipsec.d/
-
+```
+#### 4. Enable the ipsec service and restart to apply configuration changes.
+```shell
+sudo systemcrl enable ipsec
+sudo systemcrl restart ipsec
 ```
 ## [frrouting](https://frrouting.org/)
 ```shell
