@@ -99,9 +99,13 @@ sudo nano /etc/hosts
 # gws zone = public
 192.168.1.11 gw-1
 192.168.1.12 gw-2
+192.168.1.10 mk8s-vip
 
-# gws zone = trusted 
-# 192.168.3.1 = vrrp
+# mk8s gateway zone = trusted
+# ffr vrrp address between gateway nodes
+192.168.3.3 mk8s-gw-2
+192.168.3.2 mk8s-gw-1
+192.168.3.1 mk8s-gw
 
 # mk8s zone = public
 192.168.3.11 mk8s-1
