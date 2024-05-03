@@ -101,7 +101,7 @@ sudo nano /etc/hosts
 192.168.1.12 gw-2
 
 # gws zone = trusted 
-192.168.3.1 = vrrp
+# 192.168.3.1 = vrrp
 
 # mk8s zone = public
 192.168.3.11 mk8s-1
