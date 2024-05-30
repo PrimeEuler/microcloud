@@ -177,8 +177,8 @@ sudo cp ipsec.d/ocigw.conf  /etc/ipsec.d/
 ```
 #### 4. Enable the ipsec service and restart to apply configuration changes.
 ```shell
-sudo systemcrl enable ipsec
-sudo systemcrl restart ipsec
+sudo systemctl enable ipsec
+sudo systemctl restart ipsec
 ```
 ## [frrouting](https://frrouting.org/)
 #### 1. Install free range routing on the gateway nodes.
